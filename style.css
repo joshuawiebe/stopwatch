@@ -16,6 +16,11 @@ body {
   height: 100vh;
 }
 
+body.darkmode {
+  --bg: #18191a;
+  --text-color: #f5f7fa;
+}
+
 .container {
   background: white;
   border-radius: 20px;
@@ -26,13 +31,18 @@ body {
   width: 90%;
 }
 
+body.darkmode .container {
+  background: #242526;
+  color: var(--text-color);
+}
+
 .time {
   font-size: 3em;
   color: var(--text-color);
   margin-bottom: 30px;
 }
 
-#stopwatch {
+#reset, #stopwatch {
   background: linear-gradient(144deg, var(--blue), var(--blue-dark));
   color: white;
   border: none;
@@ -45,10 +55,10 @@ body {
   transition: background -1.3s ease, transform 0.1s ease;
 }
 
-#stopwatch:hover {
+#reset:hover, #stopwatch:hover {
   background: linear-gradient(145deg, var(--blue-dark), var(--blue));
 }
 
-#stopwatch:active {
+#reset:active, #stopwatch:active {
   transform: scale(0.97);
 }
