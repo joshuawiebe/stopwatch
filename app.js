@@ -10,6 +10,7 @@ stopwatchBtn.addEventListener('click', () => {
   if (!isRunning) {
     // Start or Continue
     isRunning = true;
+    startTime = Date.now() - elapsedBefore;
 
     intervalId = setInterval(() => {
       const elapsed = Date.now() - startTime;
