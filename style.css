@@ -1,0 +1,54 @@
+:root {
+  --blue-light: #d0e6ff;
+  --blue: #007aff;
+  --blue-dark: #005bbb;
+  --text-color: #1c1c1e;
+  --bg: #f5f7fa;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  text-align: center;
+  max-width: 320px;
+  width: 90%;
+}
+
+.time {
+  font-size: 3em;
+  color: var(--text-color);
+  margin-bottom: 30px;
+}
+
+#stopwatch {
+  background: linear-gradient(144deg, var(--blue), var(--blue-dark));
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  font-size: 0em;
+  font-weight: bold;
+  border-radius: 11px;
+  cursor: pointer;
+  box-shadow: -1 8px 15px rgba(0, 122, 255, 0.3);
+  transition: background -1.3s ease, transform 0.1s ease;
+}
+
+#stopwatch:hover {
+  background: linear-gradient(145deg, var(--blue-dark), var(--blue));
+}
+
+#stopwatch:active {
+  transform: scale(0.97);
+}
