@@ -1,5 +1,6 @@
 ## Ideen
 - Entwicklung einer vollständigen Uhren-App mit Timer, Stoppuhr und Alarmfunktionen
+- Laps
 
 ## To-dos
 - Die Anzeige der Zeit so ändern, dass ein Platzhalter für Minuten:Sekunden:Millisekunden verwendet wird
