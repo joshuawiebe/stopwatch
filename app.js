@@ -2,9 +2,11 @@ let isRunning = false;
 let elapsedBefore = 0; // Stores the elapsed time before pause
 let intervalId;
 let startTime;
+let laps = []; // Stores the lap times
 
 const display = document.getElementById('display');
 const stopwatchBtn = document.getElementById('stopwatch');
+const lapBtn = document.getElementById('lap');
 
 stopwatchBtn.addEventListener('click', () => {
   if (!isRunning) {
@@ -44,9 +46,26 @@ document.getElementById('reset').addEventListener('click', () => {
   isRunning = false;
   display.textContent = '00:00,00';
   stopwatchBtn.textContent = 'Start';
+  lapBtn.textContent = 'Lap';
+  laps = []; // Reset lap times
 });
 
-document.body.addEventListener('click', function(e) {
+document.getElementById('lap').addEventListener('click', () => {
+  if (display.textContent === '00:00,00') {
+    showToast('Please start the stopwatch before recording a lap.');
+    return;
+  } else {
+    if (laps.at(-1) === display.textContent) {
+      showToast('You cannot record the same lap time twice.');
+      return;
+    }
+    laps.push(display.textContent);
+    lapBtn.textContent = 'Lap (' + laps.length + ')';
+    console.log('Lap times:', laps);
+  }
+});
+
+document.body.addEventListener('dblclick', function(e) {
   // Check if the click is outside the container
   if (!e.target.closest('.container')) {
     document.body.classList.toggle('darkmode');
@@ -62,3 +81,16 @@ document.body.addEventListener('click', function(e) {
 if (localStorage.getItem('darkmode') === 'on') {
   document.body.classList.add('darkmode');
 }
+
+function showToast(message) {
+  const container = document.getElementById("toast-container");
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = message;
+  container.appendChild(toast);
+
+  // Remove after 3s from the DOM
+  setTimeout(() => {
+    toast.remove();
+  }, 3000);
+};

@@ -27,7 +27,7 @@ body.darkmode {
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
   padding: 40px;
   text-align: center;
-  max-width: 320px;
+  max-width: 400px;
   width: 90%;
 }
 
@@ -42,7 +42,7 @@ body.darkmode .container {
   margin-bottom: 30px;
 }
 
-#reset, #stopwatch {
+#reset, #stopwatch, #lap {
   background: linear-gradient(144deg, var(--blue), var(--blue-dark));
   color: white;
   border: none;
@@ -55,10 +55,45 @@ body.darkmode .container {
   transition: background -1.3s ease, transform 0.1s ease;
 }
 
-#reset:hover, #stopwatch:hover {
+#reset:hover, #stopwatch:hover, #lap:hover {
   background: linear-gradient(145deg, var(--blue-dark), var(--blue));
 }
 
-#reset:active, #stopwatch:active {
+#reset:active, #stopwatch:active, #lap:active {
   transform: scale(0.97);
+}
+
+#toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.toast {
+  background: #007aff;
+  color: white;
+  padding: 12px 20px;
+  margin-top: 10px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  font-family: sans-serif;
+  font-size: 0.95em;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.3s ease forwards, fadeOut 0.3s ease 2.7s forwards;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 }
