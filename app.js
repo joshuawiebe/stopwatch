@@ -52,11 +52,11 @@ document.getElementById('reset').addEventListener('click', () => {
 
 document.getElementById('lap').addEventListener('click', () => {
   if (display.textContent === '00:00,00') {
-    showToast('Please start the stopwatch before recording a lap.');
+    showToast('Please start the stopwatch before recording a lap.', 3000);
     return;
   } else {
     if (laps.at(-1) === display.textContent) {
-      showToast('You cannot record the same lap time twice.');
+      showToast('You cannot record the same lap time twice.', 3000);
       return;
     }
     laps.push(display.textContent);
@@ -82,15 +82,21 @@ if (localStorage.getItem('darkmode') === 'on') {
   document.body.classList.add('darkmode');
 }
 
-function showToast(message) {
+function showToast(message, time) {
   const container = document.getElementById("toast-container");
   const toast = document.createElement("div");
   toast.className = "toast";
   toast.textContent = message;
   container.appendChild(toast);
 
-  // Remove after 3s from the DOM
+  // Remove after specified time from the DOM
   setTimeout(() => {
     toast.remove();
-  }, 3000);
+  }, time);
 };
+
+function info() {
+  showToast('This is a simple stopwatch application. Click to start, stop,' + '<br>' + 'or reset the stopwatch. Double-click to toggle dark mode.', 5000);
+};
+
+info();
