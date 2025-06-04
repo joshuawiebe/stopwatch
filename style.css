@@ -108,7 +108,7 @@ body.darkmode .container {
   text-align: left;
 }
 
-/* Clean up with global design config and local for every component for better maintainability */
+/* TODO: Clean up with global design config and local for every component for better maintainability */
 
 #toggle-laps {
   background: linear-gradient(144deg, var(--blue), var(--blue-dark));
