@@ -51,15 +51,15 @@ body.darkmode .container {
   font-weight: bold;
   border-radius: 11px;
   cursor: pointer;
-  box-shadow: -1 8px 15px rgba(0, 122, 255, 0.3);
+  box-shadow: 0 8px 15px rgba(0, 122, 255, 0.3);
   transition: background -1.3s ease, transform 0.1s ease;
 }
 
-#reset:hover, #stopwatch:hover, #lap:hover {
+#reset:hover, #stopwatch:hover, #lap:hover, #toggle-laps:hover {
   background: linear-gradient(145deg, var(--blue-dark), var(--blue));
 }
 
-#reset:active, #stopwatch:active, #lap:active {
+#reset:active, #stopwatch:active, #lap:active, #toggle-laps:active {
   transform: scale(0.97);
 }
 
@@ -108,15 +108,21 @@ body.darkmode .container {
   text-align: left;
 }
 
+/* Clean up with global design config and local for every component for better maintainability */
+
 #toggle-laps {
-  background: var(--blue-light);
-  color: var(--text-color);
+  background: linear-gradient(144deg, var(--blue), var(--blue-dark));
+  color: white;
   border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
+  border-radius: 11px;
+  padding: 14px 30px;
   cursor: pointer;
-  margin-bottom: 10px;
   font-size: 1em;
+  font-weight: bold;
+  box-shadow: 0 8px 15px rgba(0, 122, 255, 0.3);
+  transition: background 0.3s ease, transform 0.1s ease;
+  display: block;
+  margin: 20px auto 10px auto;
 }
 
 #lap-times {
