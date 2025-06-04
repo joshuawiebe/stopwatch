@@ -8,6 +8,8 @@ const display = document.getElementById('display');
 const stopwatchBtn = document.getElementById('stopwatch');
 const lapBtn = document.getElementById('lap');
 const toastContainer = document.getElementById('toast-container');
+const toggleLapsBtn = document.getElementById('toggle-laps');
+const lapsList = document.getElementById('lap-times');
 
 stopwatchBtn.addEventListener('click', () => {
   if (!isRunning) {
@@ -49,6 +51,11 @@ document.getElementById('reset').addEventListener('click', () => {
   stopwatchBtn.textContent = 'Start';
   lapBtn.textContent = 'Lap';
   laps = []; // Reset lap times
+  renderLaps(); // Clear lap times display
+  console.log('Stopwatch reset');
+  showToast('Stopwatch has been reset.', 3000);
+  showToast('All lap times have been cleared.', 3000);
+  console.log('Lap times cleared');
 });
 
 document.getElementById('lap').addEventListener('click', () => {
@@ -62,7 +69,7 @@ document.getElementById('lap').addEventListener('click', () => {
     }
     laps.push(display.textContent);
     lapBtn.textContent = 'Lap (' + laps.length + ')';
-
+    renderLaps();
     console.log('Lap times:', laps);
   }
 });
@@ -95,6 +102,25 @@ function showToast(message, time) {
   setTimeout(() => {
     toast.remove();
   }, time);
+};
+
+toggleLapsBtn.addEventListener('click', () => {
+  if (lapsList.style.display === 'none' || lapsList.style.display === '') {
+    lapsList.style.display = 'block';
+    toggleLapsBtn.textContent = 'Hide Laps';
+  } else {
+    lapsList.style.display = 'none';
+    toggleLapsBtn.textContent = 'Show Laps';
+  }
+});
+
+function renderLaps() {
+  lapsList.innerHTML = ''; // Clear previous laps
+  laps.forEach((lap, index) => {
+    const li = document.createElement('li');
+    li.textContent = `Lap ${index + 1}: ${lap}`;
+    lapsList.appendChild(li);
+  });
 };
 
 function info() {
