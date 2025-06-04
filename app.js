@@ -7,6 +7,7 @@ let laps = []; // Stores the lap times
 const display = document.getElementById('display');
 const stopwatchBtn = document.getElementById('stopwatch');
 const lapBtn = document.getElementById('lap');
+const toastContainer = document.getElementById('toast-container');
 
 stopwatchBtn.addEventListener('click', () => {
   if (!isRunning) {
@@ -61,6 +62,7 @@ document.getElementById('lap').addEventListener('click', () => {
     }
     laps.push(display.textContent);
     lapBtn.textContent = 'Lap (' + laps.length + ')';
+
     console.log('Lap times:', laps);
   }
 });
@@ -83,20 +85,20 @@ if (localStorage.getItem('darkmode') === 'on') {
 }
 
 function showToast(message, time) {
-  const container = document.getElementById("toast-container");
+  // Create a toast element and append it to the toast container
   const toast = document.createElement("div");
   toast.className = "toast";
   toast.textContent = message;
-  container.appendChild(toast);
+  toastContainer.appendChild(toast);
 
-  // Remove after specified time from the DOM
+  // Remove the toast from the DOM after the specified time (in milliseconds)
   setTimeout(() => {
     toast.remove();
   }, time);
 };
 
 function info() {
-  showToast('This is a simple stopwatch application. Click to start, stop,' + '<br>' + 'or reset the stopwatch. Double-click to toggle dark mode.', 5000);
+  showToast('This is a simple stopwatch application. Click to start, stop, or reset the stopwatch. Double-click to toggle dark mode.', 5000);
 };
 
 info();

@@ -84,6 +84,11 @@ body.darkmode .container {
   animation: slideIn 0.3s ease forwards, fadeOut 0.3s ease 2.7s forwards;
 }
 
+.darkmode #toast-container .toast {
+  background: #3a3b3c;
+  color: var(--text-color);
+}
+
 @keyframes slideIn {
   to {
     opacity: 1;
@@ -96,4 +101,41 @@ body.darkmode .container {
     opacity: 0;
     transform: translateY(20px);
   }
+}
+
+.laps-section {
+  margin-top: 20px;
+  text-align: left;
+}
+
+#toggle-laps {
+  background: var(--blue-light);
+  color: var(--text-color);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+#lap-times {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  background: #f0f4fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+#lap-times li {
+  padding: 8px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  font-family: monospace;
+}
+
+#lap-times li:last-child {
+  border-bottom: none;
 }
