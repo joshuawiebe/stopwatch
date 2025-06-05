@@ -8,8 +8,11 @@ const display = document.getElementById('display');
 const stopwatchBtn = document.getElementById('stopwatch');
 const lapBtn = document.getElementById('lap');
 const toastContainer = document.getElementById('toast-container');
+const lapsSection = document.querySelector('.laps-section');
 const toggleLapsBtn = document.getElementById('toggle-laps');
 const lapsList = document.getElementById('lap-times');
+
+lapsSection.style.display = 'none';
 
 stopwatchBtn.addEventListener('click', () => {
   if (!isRunning) {
@@ -51,6 +54,7 @@ document.getElementById('reset').addEventListener('click', () => {
   stopwatchBtn.textContent = 'Start';
   lapBtn.textContent = 'Lap';
   laps = []; // Reset lap times
+  lapsSection.style.display = 'none'; // Hide laps section
   renderLaps(); // Clear lap times display
   console.log('Stopwatch reset');
   showToast('Stopwatch has been reset.', 3000);
@@ -58,7 +62,7 @@ document.getElementById('reset').addEventListener('click', () => {
   console.log('Lap times cleared');
 });
 
-document.getElementById('lap').addEventListener('click', () => {
+lapBtn.addEventListener('click', () => {
   if (display.textContent === '00:00,00') {
     showToast('Please start the stopwatch before recording a lap.', 3000);
     return;
@@ -70,6 +74,7 @@ document.getElementById('lap').addEventListener('click', () => {
     laps.push(display.textContent);
     lapBtn.textContent = 'Lap (' + laps.length + ')';
     renderLaps();
+    lapsSection.style.display = 'block'; // Show laps section
     console.log('Lap times:', laps);
   }
 });
@@ -87,8 +92,19 @@ document.body.addEventListener('dblclick', function(e) {
   }
 });
 
+// Check system dark mode if no localStorage setting exists
+if (localStorage.getItem('darkmode') === null) {
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.body.classList.add('darkmode');
+    localStorage.setItem('darkmode', 'on');
+  }
+}
+
+// Anwenden der gespeicherten Einstellung
 if (localStorage.getItem('darkmode') === 'on') {
   document.body.classList.add('darkmode');
+} else {
+  document.body.classList.remove('darkmode');
 }
 
 function showToast(message, time) {

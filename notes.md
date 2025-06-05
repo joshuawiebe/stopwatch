@@ -21,3 +21,5 @@
 - [ ] Add sound or notification when timer/alarm ends
 - [ ] Make the UI responsive and mobile-friendly
 - [ ] Add localization/multi-language support
+- [ ] Hide Laps section when no exixts
+- [ ] Optimize Page for SEO
