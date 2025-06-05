@@ -81,7 +81,7 @@ lapBtn.addEventListener('click', () => {
 
 document.body.addEventListener('dblclick', function(e) {
   // Check if the click is outside the container
-  if (!e.target.closest('.container')) {
+  if (!e.target.closest('.container') && !e.target.closest('#toast-container')) {
     document.body.classList.toggle('darkmode');
 
     if (document.body.classList.contains('darkmode')) {
