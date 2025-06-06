@@ -21,6 +21,9 @@
 - [ ] Add sound or notification when timer/alarm ends
 - [ ] Make the UI responsive and mobile-friendly
 - [ ] Add localization/multi-language support
+- [ ] Hide Laps section when no exixts
+- [ ] Highlight the shortest and longest lap with green/red
+- [ ] Optimize Page for SEO
 
 ## Status (June 2025)
 - Stopwatch with start/stop/reset/lap works reliably

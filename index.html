@@ -10,12 +10,14 @@
   <body>
     <div class="container">
       <div class="time" id="display">00:00,00</div>
-      <button id="reset">Reset</button>
-      <button id="stopwatch">Start</button>
-      <button id="lap">Lap</button>
-      <div class="laps-section">
-        <button id="toggle-laps">Show Laps</button>
-        <ul id="lap-times" style="display:none;"></ul>
+      <div class="button-row">
+        <button id="reset">Reset</button>
+        <button id="stopwatch">Start</button>
+        <button id="lap">Lap</button>
+      </div>
+      <div class="laps-section" id="laps-section">
+        <div id="current-lap" class="current-lap" style="display:none;"></div>
+        <ul id="lap-times"></ul>
       </div>
     </div>
     <div id="toast-container"></div>
