@@ -22,4 +22,5 @@
 - [ ] Make the UI responsive and mobile-friendly
 - [ ] Add localization/multi-language support
 - [ ] Hide Laps section when no exixts
+- [ ] Highlight the shortest and longest lap with green/red
 - [ ] Optimize Page for SEO

@@ -7,40 +7,56 @@
   --blue-dark: #005bbb;
   --text-color: #1c1c1e;
   --bg: #f5f7fa;
+  --lap-best-bg: #e8f5e9;
+  --lap-best-color: #2e7d32;
+  --lap-worst-bg: #ffebee;
+  --lap-worst-color: #c62828;
+  --current-lap-bg: #e3f0ff;
+  --current-lap-color: #1565c0;
 }
 
+/* =========================
+   Base Styles
+   ========================= */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: var(--bg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   color: var(--text-color);
-}
-
-body.darkmode {
-  --bg: #18191a;
-  --text-color: #f5f7fa;
+  min-height: 100vh;
 }
 
 /* =========================
    Container
    ========================= */
 .container {
-  background: white;
+  background: #fff;
   border-radius: 20px;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
   padding: 40px;
   text-align: center;
-  max-width: 400px;
-  width: 90%;
+  max-width: 520px;
+  width: 96%;
+  margin: 40px auto 0 auto;
+  box-sizing: border-box;
 }
 
-body.darkmode .container {
-  background: linear-gradient(120deg, #23272f 0%, #18191a 100%);
-  box-shadow: 0 4px 18px rgba(0, 122, 255, 0.12);
+/* Responsive: slightly smaller on tablets */
+@media (max-width: 800px) {
+  .container {
+    max-width: 98vw;
+    padding: 18px;
+  }
+}
+
+/* Responsive: even smaller on phones */
+@media (max-width: 500px) {
+  .container {
+    padding: 12px;
+    max-width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 
 /* =========================
@@ -56,40 +72,45 @@ body.darkmode .container {
 }
 
 /* =========================
-   Buttons
+   Button Row
    ========================= */
-#reset, #stopwatch, #lap, #toggle-laps {
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.button-row button {
+  flex: 1 1 0;
+  min-width: 80px;
+  max-width: 140px;
+  height: 48px;
+  margin-bottom: 0;
   background: linear-gradient(144deg, var(--blue), var(--blue-dark));
   color: #fff;
   border: none;
-  padding: 14px 30px;
+  padding: 0 18px;
   font-size: 1em;
   font-weight: bold;
   border-radius: 11px;
   cursor: pointer;
-  box-shadow: 0 8px 15px rgba(0, 122, 255, 0.3);
+  box-shadow: 0 8px 15px rgba(0, 122, 255, 0.18);
   transition: background 0.2s, transform 0.1s;
-  margin-bottom: 10px;
-}
-
-#toggle-laps {
-  padding: 12px 28px;
-  font-size: 1.05em;
-  font-weight: 600;
-  border-radius: 10px;
-  margin: 0 auto 16px auto;
-  display: block;
   letter-spacing: 0.5px;
-  box-shadow: 0 6px 12px rgba(0, 122, 255, 0.18);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#reset:hover, #stopwatch:hover, #lap:hover, #toggle-laps:hover,
-#reset:focus, #stopwatch:focus, #lap:focus, #toggle-laps:focus {
+.button-row button:hover,
+.button-row button:focus {
   background: linear-gradient(145deg, var(--blue-dark), var(--blue));
   transform: translateY(-2px) scale(1.04);
 }
 
-#reset:active, #stopwatch:active, #lap:active, #toggle-laps:active {
+.button-row button:active {
   transform: scale(0.97);
 }
 
@@ -108,27 +129,18 @@ body.darkmode .container {
   transition: background 0.3s;
 }
 
-body.darkmode .laps-section {
-  background: linear-gradient(120deg, #23272f 0%, #18191a 100%);
-  box-shadow: 0 4px 18px rgba(0, 122, 255, 0.12);
-}
-
+/* Limit lap list height and enable scrolling after 5 laps */
 #lap-times {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 220px;
-  overflow-y: auto;
   background: #f8fbff;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   border: 1px solid #e3eaf3;
   transition: background 0.3s;
-}
-
-body.darkmode #lap-times {
-  background: #23272f;
-  border: 1px solid #2c2f36;
+  max-height: 240px; /* About 5 laps, then scroll */
+  overflow-y: auto;
 }
 
 #lap-times li {
@@ -141,11 +153,6 @@ body.darkmode #lap-times {
   transition: background 0.2s;
 }
 
-body.darkmode #lap-times li {
-  border-bottom: 1px solid #2c2f36;
-  color: #e3eaf3;
-}
-
 #lap-times li:last-child {
   border-bottom: none;
 }
@@ -154,8 +161,31 @@ body.darkmode #lap-times li {
   background: #eaf4ff;
 }
 
-body.darkmode #lap-times li:hover {
-  background: #232b36;
+/* Best Lap (shortest) */
+.lap-best {
+  background: var(--lap-best-bg) !important;
+  color: var(--lap-best-color) !important;
+  font-weight: bold;
+}
+
+/* Worst Lap (longest) */
+.lap-worst {
+  background: var(--lap-worst-bg) !important;
+  color: var(--lap-worst-color) !important;
+  font-weight: bold;
+}
+
+/* Current Lap */
+.current-lap {
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  font-size: 1.15em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--current-lap-color);
+  background: var(--current-lap-bg);
+  border-radius: 8px;
+  padding: 8px 16px;
+  display: block;
 }
 
 /* =========================
@@ -169,7 +199,7 @@ body.darkmode #lap-times li:hover {
 }
 
 .toast {
-  background: #007aff;
+  background: var(--blue);
   color: white;
   padding: 12px 20px;
   margin-top: 10px;
@@ -202,6 +232,44 @@ body.darkmode #toast-container .toast {
 }
 
 /* =========================
+   Dark Mode
+   ========================= */
+body.darkmode {
+  --bg: #18191a;
+  --text-color: #f5f7fa;
+  --lap-best-bg: #1e3321;
+  --lap-best-color: #7fff7f;
+  --lap-worst-bg: #332020;
+  --lap-worst-color: #ff7f7f;
+  --current-lap-bg: #1a2330;
+  --current-lap-color: #90caff;
+}
+
+body.darkmode .container {
+  background: linear-gradient(120deg, #23272f 0%, #18191a 100%);
+  box-shadow: 0 4px 18px rgba(0, 122, 255, 0.12);
+}
+
+body.darkmode .laps-section {
+  background: linear-gradient(120deg, #23272f 0%, #18191a 100%);
+  box-shadow: 0 4px 18px rgba(0, 122, 255, 0.12);
+}
+
+body.darkmode #lap-times {
+  background: #23272f;
+  border: 1px solid #2c2f36;
+}
+
+body.darkmode #lap-times li {
+  border-bottom: 1px solid #2c2f36;
+  color: #e3eaf3;
+}
+
+body.darkmode #lap-times li:hover {
+  background: #232b36;
+}
+
+/* =========================
    Responsive Design
    ========================= */
 @media (max-width: 500px) {
@@ -216,8 +284,69 @@ body.darkmode #toast-container .toast {
   .time {
     font-size: 2em;
   }
-  #reset, #stopwatch, #lap, #toggle-laps {
-    padding: 10px 8vw;
-    font-size: 0.95em;
+  .button-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .button-row button {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+    max-width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .button-row {
+    gap: 8px;
+    margin-bottom: 12px;
+    justify-content: center;
+  }
+  .button-row button {
+    min-width: 0;
+    max-width: 120px;
+    width: 100%;
+    font-size: 1em;
+    height: 42px;
+    padding: 0 8px;
+    margin: 0;
+  }
+  .laps-section {
+    padding: 10px 2px 8px 2px;
+    max-width: 100vw;
+    border-radius: 0;
+    margin-top: 18px;
+  }
+  #lap-times li {
+    padding: 8px 8px;
+    font-size: 1em;
+  }
+  .current-lap {
+    font-size: 1em;
+    padding: 6px 8px;
+  }
+  #toast-container {
+    right: 8px;
+    left: 8px;
+    bottom: 8px;
+    width: auto;
+    max-width: 95vw;
+  }
+}
+
+/* Stack buttons only on very small screens */
+@media (max-width: 400px) {
+  .button-row {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .button-row button {
+    max-width: 100%;
+    width: 100%;
   }
 }
